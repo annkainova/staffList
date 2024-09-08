@@ -1,12 +1,12 @@
 import React from 'react';
-import { Select, Checkbox, Divider } from '@chakra-ui/react';
+import { Select, Checkbox, Divider, FormLabel } from '@chakra-ui/react';
 import classes from './SortFilterSection.module.scss';
 
 const SortFilterSection = () => {
   return (
-    <aside className={classes.SortFilter}>
-      <div className={classes.SortFilter__sort}>
-        <Select placeholder="Сортировка">
+    <article className={classes.sortFilter}>
+      <div className={classes.sortFilter__sort}>
+        <Select placeholder="Сортировка" boxShadow="sm">
           <option value="option1">По дате рождения + -</option>
           <option value="option2">По дате рождения - +</option>
           <option value="option3">По имени А - Я </option>
@@ -16,10 +16,10 @@ const SortFilterSection = () => {
 
       <Divider />
 
-      <div className={classes.SortFilter__filter}>
+      <div className={classes.sortFilter__filter}>
         <div>
-          <h3 >Должность</h3>
-          <Select>
+          <FormLabel>Должность</FormLabel>
+          <Select boxShadow="sm">
             <option value="option1">Повар</option>
             <option value="option2">Офицант</option>
             <option value="option3">Водитель</option>
@@ -27,11 +27,11 @@ const SortFilterSection = () => {
         </div>
 
         <div>
-          <h3>Статус</h3>
+          <FormLabel>Статус</FormLabel>
           <Checkbox defaultChecked>В архиве</Checkbox>
         </div>
       </div>
-    </aside>
+    </article>
   );
 };
 

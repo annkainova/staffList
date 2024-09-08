@@ -15,8 +15,8 @@
   --dark-color: #11181C;
 
   /* sizes */
-  --h1: 30px;
-  --h2: 20px;
+  --h1: 40px;
+  --h2: 24px;
   --h3: 18px;
   --text: 16px;
 }
@@ -54,6 +54,7 @@ body {
   min-width: 360px;
   font-family: var(--ff), sans-serif;
   font-size: var(--main-font-size, 16px);
+  background: #fff;
 }
 
 .darkMode {
@@ -96,6 +97,7 @@ li {
 .container {
   margin: 0 auto;
   padding: 0 var(--container-offset);
+  width: 100%;
   max-width: var(--container-width);
 }
 
@@ -107,4 +109,16 @@ li {
 
 .stop-scroll {
   overflow: hidden;
+}
+
+// .main {
+//   background-color: #fff;
+//   width: 100%;
+//   height: 100vh;
+// }
+
+.h1 {
+  font-weight: 600;
+  font-size: var(--h1);
+  color: #000;
 }

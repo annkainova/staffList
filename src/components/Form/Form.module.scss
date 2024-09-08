@@ -1,0 +1,18 @@
+.form {
+  grid-column: 8/ 13;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0px 0px 15px 0px rgba(64, 64, 83, 0.05);
+
+  &__header {
+    margin-bottom: 24px;
+    font-weight: 600;
+    font-size: var(--h2);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
