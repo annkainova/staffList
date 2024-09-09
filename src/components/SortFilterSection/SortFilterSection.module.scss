@@ -1,7 +1,10 @@
 .sortFilter {
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
   grid-column: 1 / 3;
+  height: 100vh;
   gap: 54px;
 
 

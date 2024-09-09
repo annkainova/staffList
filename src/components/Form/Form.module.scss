@@ -1,8 +1,13 @@
 .form {
+  position: sticky;
+  top: 0;
+  height: 100vh;
   grid-column: 8/ 13;
   border-radius: 8px;
   padding: 24px;
   box-shadow: 0px 0px 15px 0px rgba(64, 64, 83, 0.05);
+
+  z-index: 30;
 
   &__header {
     margin-bottom: 24px;
