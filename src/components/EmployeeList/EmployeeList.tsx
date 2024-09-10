@@ -9,6 +9,7 @@ import { EmployeeInterface } from '../../types/Employee';
 import { useDispatch, useSelector } from 'react-redux';
 import { setEmployeesList } from '../../state/Slice/EmployeesListSlice';
 import { RootState } from '../../state/store';
+import { setSelectedEmployee } from '../../state/Slice/SelectedEmployee';
 
 const EmployeeList = () => {
   const dispatch = useDispatch();
@@ -25,12 +26,19 @@ const EmployeeList = () => {
     performSearch();
   }, [performSearch]);
 
-  console.log('employeesList', employeesList);
+  const handleClickEmployee = (selectedEmployee: EmployeeInterface) => {
+    dispatch(setSelectedEmployee(selectedEmployee));
+    console.log(selectedEmployee);
+  };
 
   return (
     <section className={classes.employeeList}>
       {employeesList.map((employee: EmployeeInterface) => (
-        <Link to={`employees/${employee.id}`} key={employee.id}>
+        <Link
+          to={`employees-edit/${employee.id}`}
+          key={employee.id}
+          onClick={() => handleClickEmployee(employee)}
+        >
           <Employee
             name={employee.name}
             role={employee.role}

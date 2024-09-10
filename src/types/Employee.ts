@@ -6,3 +6,7 @@ export interface EmployeeInterface {
   phone: string;
   birthday: string;
 }
+
+export interface EmployeeForm extends EmployeeInterface {
+  header: string;
+}
