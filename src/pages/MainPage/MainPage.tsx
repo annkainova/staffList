@@ -13,7 +13,7 @@ const MainPage = () => {
         <Header />
         <SortFilterSection />
         <EmployeeList />
-        <Outlet />
+        {/* <Outlet /> */}
       </div>
     </section>
   );

@@ -1,37 +1,49 @@
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Form from '../../../components/Form/Form';
-import { RootState } from '../../../state/store';
 
 import classes from './Form.module.scss';
-import { useParams } from 'react-router-dom';
-
-interface EditComponentInterface {
-  header: string;
-  // selectedEmployee: boolean;
-}
+import { useNavigate, useParams } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+import getEmployeeById from '../../../api/getEmployeeById';
+import { EditComponentInterface } from '../../../types/Employee';
+import { setSelectedEmployee } from '../../../state/Slice/SelectedEmployeeSlice';
+import { Button, Icon } from '@chakra-ui/react';
+import { CloseIcon } from '@chakra-ui/icons';
 
 const EditComponent: React.FC<EditComponentInterface> = (props) => {
-  // const employeeId = useParams<{ employeesId: string }>();
-  const selectedEmployee = useSelector(
-    (state: RootState) => state.selectedEmployee.selectedEmployee
-  );
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { employeesId } = useParams<{ employeesId: string }>();
 
-  console.log('selectedEmployee', selectedEmployee);
+  const requestEmployeeById = useCallback(async () => {
+    if (props.isSelectedEmployee && employeesId) {
+      try {
+        const employeeResponse = await getEmployeeById(employeesId);
+        dispatch(setSelectedEmployee(employeeResponse));
+      } catch (error) {
+        console.error('Error fetching employee:', error);
+      }
+    }
+  }, [dispatch, employeesId, props.isSelectedEmployee]);
 
+  useEffect(() => {
+    requestEmployeeById();
+  }, [requestEmployeeById]);
 
+  const handleClickClose = () => {
+    navigate('/');
+  };
 
   return (
     <article className={classes.form}>
       <div className={classes.form__box}>
-        <h2 className={classes.form__header}>{props.header}</h2>
-        <Form
-          id={selectedEmployee.id}
-          name={selectedEmployee.name}
-          role={selectedEmployee?.role}
-          phone={selectedEmployee?.phone}
-          birthday={selectedEmployee?.birthday}
-          isArchive={selectedEmployee?.isArchive}
-        />
+  <div className={classes.form__headerBox}>
+          <h2 className={classes.form__header}>{props.header}</h2>
+          <Button onClick={handleClickClose}>
+            <Icon as={CloseIcon} />
+          </Button>
+  </div>
+        <Form isSelectedEmployee={props.isSelectedEmployee} />
       </div>
     </article>
   );

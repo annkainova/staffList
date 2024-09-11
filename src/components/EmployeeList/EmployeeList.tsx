@@ -1,15 +1,23 @@
-import { Table, TableContainer, Tbody, Th, Thead, Tr } from '@chakra-ui/react';
+import {
+  Spinner,
+  Table,
+  TableContainer,
+  Tbody,
+  Th,
+  Thead,
+  Tr,
+} from '@chakra-ui/react';
 
 import Employee from '../Employee/Employee';
 import classes from './EmployeeList.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import getEmployees from '../../api/getEmployees';
 import { useCallback, useEffect, useState } from 'react';
 import { EmployeeInterface } from '../../types/Employee';
 import { useDispatch, useSelector } from 'react-redux';
 import { setEmployeesList } from '../../state/Slice/EmployeesListSlice';
 import { RootState } from '../../state/store';
-import { setSelectedEmployee } from '../../state/Slice/SelectedEmployee';
+import { setSelectedEmployee } from '../../state/Slice/SelectedEmployeeSlice';
 
 const EmployeeList = () => {
   const dispatch = useDispatch();
@@ -17,18 +25,21 @@ const EmployeeList = () => {
     (state: RootState) => state.employees.employeesList
   );
 
-  const performSearch = useCallback(async () => {
-    const employeesListResponse = await getEmployees();
-    dispatch(setEmployeesList(employeesListResponse));
+  const requestAllEmployees = useCallback(async () => {
+    try {
+      const employeesListResponse = await getEmployees();
+      dispatch(setEmployeesList(employeesListResponse));
+    } catch (error) {
+      console.error('Error request all employee:', error);
+    }
   }, [getEmployees]);
 
   useEffect(() => {
-    performSearch();
-  }, [performSearch]);
+    requestAllEmployees();
+  }, [requestAllEmployees]);
 
   const handleClickEmployee = (selectedEmployee: EmployeeInterface) => {
     dispatch(setSelectedEmployee(selectedEmployee));
-    console.log(selectedEmployee);
   };
 
   return (

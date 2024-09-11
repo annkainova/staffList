@@ -2,10 +2,14 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { EmployeeInterface } from '../types/Employee';
 import axios from 'axios';
 
-const getEmployees = async () => {
+const editEmployees = async (
+  id: string,
+  employeeData: Partial<EmployeeInterface>
+) => {
   try {
-    const { data } = await axios.get(
-      'https://5c9db9ec928658d3.mokky.dev/employees'
+    const { data } = await axios.patch(
+      `https://5c9db9ec928658d3.mokky.dev/employees/${id}`,
+      employeeData
     );
     return data;
   } catch (error) {
@@ -17,4 +21,4 @@ const getEmployees = async () => {
   }
 };
 
-export default getEmployees;
+export default editEmployees;

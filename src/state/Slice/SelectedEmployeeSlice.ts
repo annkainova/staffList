@@ -16,8 +16,12 @@ const selectedEmployeeSlice = createSlice({
     setSelectedEmployee(state, action: PayloadAction<EmployeeInterface>) {
       state.selectedEmployee = action.payload;
     },
+    deleteSelectedEmployee(state) {
+      state.selectedEmployee = null;
+    },
   },
 });
 
-export const { setSelectedEmployee } = selectedEmployeeSlice.actions;
+export const { setSelectedEmployee, deleteSelectedEmployee } =
+  selectedEmployeeSlice.actions;
 export default selectedEmployeeSlice.reducer;

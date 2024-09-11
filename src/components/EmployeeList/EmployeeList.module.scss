@@ -1,6 +1,6 @@
 .employeeList {
   display: flex;
   flex-direction: column;
-  grid-column: 3 / 8;
+  grid-column: 3 / -1;
   gap: 16px;
 }

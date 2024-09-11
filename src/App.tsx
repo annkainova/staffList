@@ -13,16 +13,15 @@ const router = createBrowserRouter([
     path: '/',
     element: <MainPage />,
     errorElement: <ErrorPage />,
-    children: [
-      {
-        path: 'employees-edit/:employeesId',
-        element: <EditComponent header="Редактировать" />,
-      },
-      {
-        path: 'employees-add',
-        element: <EditComponent header="Создать" />,
-      },
-    ],
+    // children: [],
+  },
+  {
+    path: 'employees-edit/:employeesId',
+    element: <EditComponent header="Редактировать" isSelectedEmployee={true} />,
+  },
+  {
+    path: 'employees-add',
+    element: <EditComponent header="Создать" isSelectedEmployee={false} />,
   },
   {
     path: '*',

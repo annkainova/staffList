@@ -1,13 +1,33 @@
 .form {
-  position: sticky;
+  position: absolute;
+  left: 0;
   top: 0;
-  height: 100vh;
-  grid-column: 8/ 13;
-  border-radius: 8px;
-  padding: 24px;
-  box-shadow: 0px 0px 15px 0px rgba(64, 64, 83, 0.05);
-
   z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+
+
+  &__box {
+    position: relative;
+    z-index: 40;
+    border-radius: 8px;
+    padding: 24px;
+    width: 50%;
+    box-shadow: 0px 0px 15px 0px rgba(64, 64, 83, 0.05);
+    background-color: white;
+
+    @media (max-width: 768px) {
+      width: 90%;
+    }
+  }
+
+  &__headerBox {
+    display: flex;
+    justify-content: space-between;
+  }
 
   &__header {
     margin-bottom: 24px;

@@ -1,5 +1,5 @@
 export interface EmployeeInterface {
-  id: number;
+  id?: number;
   name: string;
   isArchive: boolean;
   role: string;
@@ -7,6 +7,7 @@ export interface EmployeeInterface {
   birthday: string;
 }
 
-export interface EmployeeForm extends EmployeeInterface {
+export interface EditComponentInterface {
   header: string;
+  isSelectedEmployee: boolean;
 }
