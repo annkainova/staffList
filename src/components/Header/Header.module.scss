@@ -1,7 +1,14 @@
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   grid-column: 1 / -1;
   margin: 48px 0;
+
+  @media (max-width:670px) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 24px 0;
+    gap: 24px;
+  }
 }

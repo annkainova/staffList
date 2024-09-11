@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import InputMask from 'react-input-mask';
 import { Input, Select, FormLabel, Button, useToast } from '@chakra-ui/react';
 import classes from './Form.module.scss';
 
@@ -9,6 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
 import createEmployees from '../../api/createEmployee';
+import { useHookFormMask } from 'use-mask-input';
 
 interface IFormInput {
   name: string;
@@ -30,7 +30,14 @@ const Form: React.FC<FormType> = (props) => {
     (state: RootState) => state.selectedEmployee.selectedEmployee
   );
 
-  const { register, handleSubmit, setValue, reset } = useForm<IFormInput>({});
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<IFormInput>({});
+  const registerWithMask = useHookFormMask(register);
 
   useEffect(() => {
     if (selectedEmployee) {
@@ -45,7 +52,7 @@ const Form: React.FC<FormType> = (props) => {
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const textSuccess = props.isSelectedEmployee
       ? 'Редактирование успешно'
-      : 'Cотрудник создан';
+      : 'Cотрудник создан успешно';
 
     const action =
       props.isSelectedEmployee && employeesId
@@ -71,46 +78,57 @@ const Form: React.FC<FormType> = (props) => {
     <form onSubmit={handleSubmit(onSubmit)} className={classes.form__form}>
       <div>
         <FormLabel>Имя</FormLabel>
-        <Input {...register('name')} size="md" />
+        <Input
+          {...register('name', {
+            required: 'Обязательное поле (Вы не можете оставить поле пустым)',
+          })}
+          size="md"
+          isInvalid={!!errors.name}
+        />
+        {errors.name && <p className="error">{errors.name.message}</p>}
       </div>
 
       <div>
         <FormLabel>Номер телефона</FormLabel>
-        <InputMask
-          mask="+7 (999) 999 - 9999"
-          {...register('phone', {
-            required: 'Номер телефона обязателен',
+        <Input
+          {...registerWithMask('phone', ['+9 (999) 999-9999'], {
+            required:
+              'Пожалуйста, введите номер телефона в формате +x (xxx) xxx-xxxx',
           })}
-        >
-          {(inputProps: IFormInput) => (
-            <Input {...inputProps} type="tel" size="md" />
-          )}
-        </InputMask>
+          type="tel"
+          size="md"
+          isInvalid={!!errors.phone}
+        />
+        {errors.phone && <p className="error">{errors.phone.message}</p>}
       </div>
 
       <div>
         <FormLabel>Дата рождения</FormLabel>
-        <InputMask
-          mask="99.99.9999"
-          {...register('birthday', {
-            required: 'Дата рождения обязательна',
+        <Input
+          {...registerWithMask('birthday', ['99.99.9999'], {
+            required: 'Пожалуйста, введите дату рождения в формате ДД.ММ.ГГГГ',
             pattern: {
               value: /^\d{2}\.\d{2}\.\d{4}$/,
               message: 'Дата должна быть в формате ДД.ММ.ГГГГ',
             },
           })}
-        >
-          {(inputProps: IFormInput) => <Input {...inputProps} size="md" />}
-        </InputMask>
+          size="md"
+          isInvalid={!!errors.birthday}
+        />
+        {errors.birthday && <p className="error">{errors.birthday.message}</p>}
       </div>
 
       <div>
         <FormLabel>Должность</FormLabel>
-        <Select {...register('role')}>
+        <Select
+          {...register('role', { required: 'Должность обязательна' })}
+          isInvalid={!!errors.role}
+        >
           <option value="cook">Повар</option>
-          <option value="waiter">Офицант</option>
+          <option value="waiter">Официант</option>
           <option value="driver">Водитель</option>
         </Select>
+        {errors.role && <p>{errors.role.message}</p>}
       </div>
 
       <div>
@@ -119,7 +137,8 @@ const Form: React.FC<FormType> = (props) => {
           <input type="checkbox" {...register('isArchive')} /> В архиве
         </label>
       </div>
-      <Button type="submit" colorScheme="blue">
+
+      <Button type="submit" colorScheme="blue" mt={4}>
         Сохранить
       </Button>
     </form>

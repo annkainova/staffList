@@ -31,8 +31,6 @@ const SortFilterSection = () => {
       <div className={classes.sortFilter__sort}>
         <Select placeholder="" boxShadow="sm" onChange={handleSortChange}>
           <option value="">По умолчанию</option>
-          <option value="birthday">По дате рождения + -</option>
-          <option value="-birthday">По дате рождения - +</option>
           <option value="name">По имени А - Я </option>
           <option value="-name">По имени Я - А </option>
         </Select>

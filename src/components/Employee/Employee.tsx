@@ -3,6 +3,17 @@ import { EmployeeInterface } from '../../types/Employee';
 import classes from './Employee.module.scss';
 
 const Employee: React.FC<EmployeeInterface> = (props: EmployeeInterface) => {
+  const role = (roleValue: string) => {
+    if (roleValue === 'cook') {
+      return 'Повар';
+    }
+    if (roleValue === 'waiter') {
+      return 'Офицант';
+    }
+    if (roleValue === 'driver') {
+      return 'Водитель';
+    }
+  };
   return (
     <article className={classes.employee}>
       <div className={classes.employee__info}>
@@ -11,7 +22,7 @@ const Employee: React.FC<EmployeeInterface> = (props: EmployeeInterface) => {
       </div>
 
       <div className={classes.employee__personal}>
-        <p className={classes.employee__position}>{props.role}</p>
+        <p className={classes.employee__position}>{role(props.role)}</p>
         <p className={classes.employee__phone}>{props.phone}</p>
       </div>
     </article>
