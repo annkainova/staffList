@@ -1,20 +1,11 @@
 import React, { useEffect } from 'react';
 import InputMask from 'react-input-mask';
-import {
-  Input,
-  Select,
-  FormLabel,
-  Checkbox,
-  Button,
-  FormErrorMessage,
-  useToast,
-} from '@chakra-ui/react';
+import { Input, Select, FormLabel, Button, useToast } from '@chakra-ui/react';
 import classes from './Form.module.scss';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import editEmployees from '../../api/editEmployee';
 import { useNavigate, useParams } from 'react-router-dom';
-import { EmployeeInterface } from '../../types/Employee';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
 import createEmployees from '../../api/createEmployee';
@@ -39,13 +30,7 @@ const Form: React.FC<FormType> = (props) => {
     (state: RootState) => state.selectedEmployee.selectedEmployee
   );
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    reset,
-    formState: { errors },
-  } = useForm<IFormInput>({});
+  const { register, handleSubmit, setValue, reset } = useForm<IFormInput>({});
 
   useEffect(() => {
     if (selectedEmployee) {
@@ -55,7 +40,7 @@ const Form: React.FC<FormType> = (props) => {
       setValue('birthday', selectedEmployee.birthday);
       setValue('isArchive', selectedEmployee.isArchive);
     }
-  }, [selectedEmployee, reset]);
+  }, [selectedEmployee, reset, setValue]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const textSuccess = props.isSelectedEmployee

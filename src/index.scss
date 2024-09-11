@@ -3,16 +3,16 @@
 
 :root {
   /* base */
-  --ff: "Roboto", sans-serif;
+  --ff: 'Roboto', sans-serif;
   --content-width: 1125px;
   --container-offset: 20px;
   --container-width: calc(var(--content-width) + (var(--container-offset) * 2));
 
   /* colors */
-  --accent-color: #006FEE;
+  --accent-color: #006fee;
   --light-color: #fff;
-  --text-color: ##71717A;
-  --dark-color: #11181C;
+  --text-color: ##71717a;
+  --dark-color: #11181c;
 
   /* sizes */
   --h1: 40px;

@@ -5,7 +5,7 @@ import { store } from './state/store';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-import FormComponent from './components/Form/Form';
+
 import EditComponent from './pages/MainPage/components/EditComponent';
 
 const router = createBrowserRouter([
@@ -13,7 +13,6 @@ const router = createBrowserRouter([
     path: '/',
     element: <MainPage />,
     errorElement: <ErrorPage />,
-    // children: [],
   },
   {
     path: 'employees-edit/:employeesId',

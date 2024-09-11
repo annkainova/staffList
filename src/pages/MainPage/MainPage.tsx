@@ -1,10 +1,6 @@
-// import React from 'react';
 import SortFilterSection from '../../components/SortFilterSection/SortFilterSection';
 import EmployeeList from '../../components/EmployeeList/EmployeeList';
-// import Form from '../../components/Form/Form';
 import Header from '../../components/Header/Header';
-import { Outlet } from 'react-router-dom';
-import FormComponent from '../../components/Form/Form';
 
 const MainPage = () => {
   return (
@@ -13,7 +9,6 @@ const MainPage = () => {
         <Header />
         <SortFilterSection />
         <EmployeeList />
-        {/* <Outlet /> */}
       </div>
     </section>
   );

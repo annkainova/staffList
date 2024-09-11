@@ -1,5 +1,3 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { EmployeeInterface } from '../types/Employee';
 import axios from 'axios';
 
 const getEmployeeById = async (id: string) => {
@@ -12,7 +10,7 @@ const getEmployeeById = async (id: string) => {
     if (error instanceof Error) {
       throw new Error(error.message);
     } else {
-      throw new Error('Unknown error when receiving employees');
+      throw new Error('Unknown error when get employee by id');
     }
   }
 };

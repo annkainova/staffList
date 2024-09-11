@@ -1,18 +1,8 @@
-import {
-  Spinner,
-  Table,
-  TableContainer,
-  Tbody,
-  Th,
-  Thead,
-  Tr,
-} from '@chakra-ui/react';
-
 import Employee from '../Employee/Employee';
 import classes from './EmployeeList.module.scss';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import getEmployees from '../../api/getEmployees';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { EmployeeInterface } from '../../types/Employee';
 import { useDispatch, useSelector } from 'react-redux';
 import { setEmployeesList } from '../../state/Slice/EmployeesListSlice';
@@ -40,7 +30,7 @@ const EmployeeList = () => {
     } catch (error) {
       console.error('Error request all employee:', error);
     }
-  }, [getEmployees, sortBy, role, isArchive]);
+  }, [sortBy, role, isArchive, dispatch]);
 
   useEffect(() => {
     requestAllEmployees();

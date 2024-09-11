@@ -8,7 +8,7 @@ import { deleteSelectedEmployee } from '../../state/Slice/SelectedEmployeeSlice'
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const handleClickAdd = () => {
     dispatch(deleteSelectedEmployee());
     navigate('/employees-add');

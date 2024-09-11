@@ -3,12 +3,12 @@ import axios from 'axios';
 interface getEmployeesInterface {
   sortBy?: string;
   role?: string;
-  isArchive?: boolean;
+  isArchive?: boolean | 'true';
 }
 
 const getEmployees = async (filters?: getEmployeesInterface) => {
   try {
-    const params: any = {};
+    const params: getEmployeesInterface = {};
 
     if (filters?.sortBy) {
       params.sortBy = filters.sortBy;

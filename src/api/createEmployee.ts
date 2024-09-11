@@ -12,7 +12,7 @@ const createEmployees = async (employeeData: Partial<EmployeeInterface>) => {
     if (error instanceof Error) {
       throw new Error(error.message);
     } else {
-      throw new Error('Unknown error when receiving employees');
+      throw new Error('Unknown error when create employees');
     }
   }
 };
