@@ -21,18 +21,26 @@ import { setSelectedEmployee } from '../../state/Slice/SelectedEmployeeSlice';
 
 const EmployeeList = () => {
   const dispatch = useDispatch();
+  const { sortBy, role, isArchive } = useSelector(
+    (state: RootState) => state.filters
+  );
+
   const employeesList = useSelector(
     (state: RootState) => state.employees.employeesList
   );
 
   const requestAllEmployees = useCallback(async () => {
     try {
-      const employeesListResponse = await getEmployees();
+      const employeesListResponse = await getEmployees({
+        sortBy,
+        role,
+        isArchive,
+      });
       dispatch(setEmployeesList(employeesListResponse));
     } catch (error) {
       console.error('Error request all employee:', error);
     }
-  }, [getEmployees]);
+  }, [getEmployees, sortBy, role, isArchive]);
 
   useEffect(() => {
     requestAllEmployees();

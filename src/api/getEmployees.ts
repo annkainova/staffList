@@ -1,11 +1,30 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { EmployeeInterface } from '../types/Employee';
 import axios from 'axios';
 
-const getEmployees = async () => {
+interface getEmployeesInterface {
+  sortBy?: string;
+  role?: string;
+  isArchive?: boolean;
+}
+
+const getEmployees = async (filters?: getEmployeesInterface) => {
   try {
+    const params: any = {};
+
+    if (filters?.sortBy) {
+      params.sortBy = filters.sortBy;
+    }
+
+    if (filters?.role) {
+      params.role = filters.role;
+    }
+
+    if (filters?.isArchive === true) {
+      params.isArchive = 'true';
+    }
+
     const { data } = await axios.get(
-      'https://5c9db9ec928658d3.mokky.dev/employees'
+      'https://5c9db9ec928658d3.mokky.dev/employees',
+      { params }
     );
     return data;
   } catch (error) {
